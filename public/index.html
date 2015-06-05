@@ -93,6 +93,18 @@
                         </div>
                     </div>
                 </fieldset>
+                
+                <fieldset>
+                    <legend>Security</legend>
+
+                    <div class="control-group">
+                        <label class="control-label" for="seckey">Security Key:</label>
+                        <div class="controls">
+                            <input type="text" name="seckey" id="seckey" style="width: 100%"></select>
+                        </div>
+                    </div>
+
+                </fieldset>
 
                 <input class="btn btn-danger" style="width: 100%;" id="sendPush" type="submit" value="Send!"/>
             </form>
@@ -189,6 +201,8 @@
 
             if(isJSON(formValues.iosOptions))
                 pushNotification.ios= JSON.parse(formValues.iosOptions);
+        
+            pushNotification.securitykey = formValues.seckey;
 
             $.ajax({
                 url: '/send',
