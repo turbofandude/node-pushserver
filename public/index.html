@@ -95,6 +95,23 @@
                 </fieldset>
                 
                 <fieldset>
+                    <legend>Windows Phone</legend>
+
+                    <div class="control-group">
+                        <label class="control-label" for="wpOptions">Payload: </label>
+
+                        <div class="controls">
+                            <textarea id="wpOptions" name="wpOptions" class="json-textarea source input-xlarge">
+{
+    "bold" : "Title",
+    "normal" : "Normal text"
+}
+                            </textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
                     <legend>Security</legend>
 
                     <div class="control-group">
@@ -201,6 +218,9 @@
 
             if(isJSON(formValues.iosOptions))
                 pushNotification.ios= JSON.parse(formValues.iosOptions);
+                
+            if(isJSON(formValues.wpOptions))
+                pushNotification.wp= JSON.parse(formValues.wpOptions);
         
             pushNotification.securitykey = formValues.seckey;
 
