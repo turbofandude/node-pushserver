@@ -1,7 +1,7 @@
 # Push Server
 
-Push Server is a cross-plateform push server based on [node-apn](https://github.com/argon/node-apn) and [node-gcm](https://github.com/ToothlessGear/node-gcm). Push Server currently supports iOS (APN) and android (GCM) platforms. It uses mongoDB to store the push tokens. 
-Note that this server is not meant to be used as a front facing server as there's no particular security implemented.
+Push Server is a cross-plateform push server based on [node-apn](https://github.com/argon/node-apn) and [node-gcm](https://github.com/ToothlessGear/node-gcm). Push Server currently supports iOS (APN), android (GCM), and Windows (MPNS) platforms. It uses mongoDB to store the push tokens. 
+This version of the server has two security features enabled to protect it as a front-facing server.
 
 [![NPM](https://nodei.co/npm/node-pushserver.png?downloads=true&stars=true)](https://nodei.co/npm/node-pushserver/)
 
@@ -43,6 +43,10 @@ If you checked out this project from github, you can find a configuration file e
     "gcm": {
         "apiKey": "YOUR_API_KEY_HERE"
     },
+    
+    "securitykey": "security_key",
+
+    "disablewebdataviewing": false,
 
     "apn": {
         "connection": {
@@ -67,6 +71,8 @@ If you checked out this project from github, you can find a configuration file e
 +  Read [Apple's Notification guide](https://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction.html) to know how to get your certificates for APN.
 
 + Please refer to node-apn's [documentation](https://github.com/argon/node-apn) to see all the available parameters and find how to convert your certificates into the expected format. 
+ 
++ The MPNS system is very lightweight and limited, in this instance.
 
 #### Dynamic configuration
 
@@ -125,12 +131,18 @@ http://domain:port/send (POST)
     "badge": 0,
     "alert": "Your message here",
     "sound": "soundName"
+  },
+  "wp" : {
+  	"bold":"Title Here",
+  	"normal":"Content here"
   }
 }
 ```
 
 + "users" is optionnal, but must be an array if set. If not defined, the push message will be sent to every user (filtered by target).
-+ You can send push messages to Android or iOS devices, or both, by using the "android" and "ios" fields with appropriate options. See GCM and APN documentation to find the available options. 
++ You can send push messages to Android, iOS, WP devices, or all of the above, by using the respective fields with appropriate options. See relevant documentation to find the available options. 
+
+The rest of the examples below are from the original document and do not show Windows Phone.
 
 #### Send push notifications
 ```
